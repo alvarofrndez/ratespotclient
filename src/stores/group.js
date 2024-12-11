@@ -97,7 +97,7 @@ export const groupStore = defineStore('group', () => {
     }
 
     async function getGroupByCode(code){
-        const result = await fetch(global_s.API_URL + '/groups/code/' + code)
+        const result = await fetch(global_s.API_URL + '/group/' + code)
 
         if(!result.ok){
             return false

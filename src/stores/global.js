@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 export const globalStore = defineStore('global', () => {
-  const API_URL = 'https://ratespotserver.onrender.com/'
+  const API_URL = 'https://ratespotserver.onrender.com'
   const USER_LOCALSTORAGE_KEY = 'albondiga_frita'
   const GROUP_LOCALSTORAGE_KEY = 'salamance_alpinero'
   const GROUP_LOCALSTORAGE_SALT = '647280043212'

@@ -3,6 +3,7 @@
     import { modalStore } from '@/stores/modal.js'
     import { groupStore } from '@/stores/group.js'
     import { userStore } from '@/stores/user.js' 
+    import { toastStore } from '@/stores/toast.js'
 
     const Separator = defineAsyncComponent(() => import('@/components/SeparatorComponent.vue'))
     const GruopSelect = defineAsyncComponent(() => import('@/components/GroupSelectComponent.vue'))
@@ -10,6 +11,7 @@
     const modal_s = modalStore()
     const group_s = groupStore()
     const user_s = userStore()
+    const toast_s = toastStore()
 
     const group_selected = ref(null)
     const code_selected = ref('')
@@ -25,7 +27,7 @@
             if(group){
                 modal_s.openModal('JoinGroup', group)
             }else{
-                console.log('el grupo no existe')
+                toast_s.show('el grupo no existe', 'error')
             }
         }else{
             if(group_selected.value != null){
@@ -37,7 +39,7 @@
                 
                 user_s.setActiveUser(group_selected.value.user)
             }else{
-                console.log('selecciona un grupo o escribe un codigo')
+                toast_s.show('elija una opcion', 'info')
             }
         }
     }
@@ -48,9 +50,9 @@
         <div class='container'>
             <h3>Crea, elija o unase a un grupo</h3>
             <div class='container-actions'>
-                <input type='text' v-model='code_selected' placeholder='Codigo de grupo'/>
+                <input type='text' v-model='code_selected' placeholder='Codigo de grupo: 12345'/>
                 <Separator/>
-                <button @click="modal_s.openModal('NewGroup')">Crear grupo</button>
+                <button class='create-group' @click="modal_s.openModal('NewGroup')">Crear</button>
                 <Separator/>
                 <GruopSelect @groupSelected='handleGroupSelected'/>
             </div>
@@ -100,6 +102,32 @@
             &-actions{
                 // display
                 @include flex(column, center, flex-start, 1rem);
+
+                input{
+                    // size
+                    width: 100%;
+
+                    // margin
+                    padding: 5px;
+
+                    // decoration
+                    border-radius: 10px;
+                    border: 1px solid $h-c-border;
+                    background-color: $h-c-background;
+                    outline: none;            
+                }
+
+                .create-group{
+                    // margin
+                    padding: 7.5px;
+
+                    // decoration
+                    border-radius: 10px;
+                    background-color: $h-c-text;
+                    border: none;
+                    color: $h-c-background !important;
+                    outline: none;            
+                }
             }
 
             .accept{
@@ -108,8 +136,15 @@
                 bottom: 1rem;
                 right: 1rem;
 
+                // margin
+                padding: 7.5px;
+
                 // decoration
-                border-radius: 1rem;
+                border-radius: 10px;
+                background-color: $h-c-text;
+                border: none;
+                color: $h-c-background !important;
+                outline: none;  
             }
         }
     }

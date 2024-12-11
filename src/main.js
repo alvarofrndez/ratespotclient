@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
+
 import { 
     HiSolidHome,
     MdLocationonSharp,
@@ -18,6 +19,8 @@ import {
     IoChevronBackOutline,
     MdEditRound,
     IoAddCircle,
+    RiLoginCircleFill,
+    IoCopy,
 } from 'oh-vue-icons/icons'
 
 addIcons(
@@ -33,6 +36,8 @@ addIcons(
     IoChevronBackOutline,
     MdEditRound,
     IoAddCircle,
+    RiLoginCircleFill,
+    IoCopy,
 )
 
 const app = createApp(App)

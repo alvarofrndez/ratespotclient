@@ -5,6 +5,7 @@
     import { modalStore } from '@/stores/modal'
     import { onMounted, ref } from 'vue'
     import { useRoute, useRouter } from 'vue-router'
+    import { toastStore } from '@/stores/toast'
 
     const SpotRates = defineAsyncComponent(() => import('@/components/SpotRatesComponent.vue'))
     const Spinner = defineAsyncComponent(() => import('@/components/SpinnerComponent.vue'))
@@ -14,6 +15,7 @@
     const modal_s = modalStore()
     const route = useRoute()
     const router = useRouter()
+    const toast_s = toastStore()
 
     const spot = ref(null)
 
@@ -49,7 +51,11 @@
         const result = await spot_s.deleteSpot(spot.value.id)
 
         if(result){
+            await spot_s.getGroupSpots(user_s.user.group_id)
+            toast_s.show('lugar eliminado', 'success')
             router.go(-1)
+        }else{
+            toast_s.show('error al eliminar el lugar', 'error')
         }
     }
 </script>
@@ -59,7 +65,7 @@
         <icon class='back-icon' name='io-chevron-back-outline' @click='() => $router.go(-1)' scale='1.3'/>
         <icon class='delete-icon' name='md-bookmarkadded-round' @click='deleteSpot' scale='1.3'/>
         <div class='container-photo'>
-            <img :src="spot.photo ? spot.photo : 'https://via.placeholder.com/150?text=Sin%20foto'" alt='foto del lugar'>
+            <img :src="spot.photo ? spot.photo : '/src/assets/images/placeholder-photo.png'" alt='foto del lugar'>
         </div>
         <article>
             <div class='container-data'>

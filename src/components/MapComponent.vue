@@ -3,12 +3,14 @@
     import { mapStore } from "@/stores/map"
     import { modalStore } from "@/stores/modal"
     import { spotStore } from "@/stores/spot"
+    import { userStore } from "@/stores/user"
 
     const Spinner = defineAsyncComponent(() => import('@/components/SpinnerComponent.vue'))
 
     const map_s = mapStore()
     const modal_s = modalStore()
     const spot_s = spotStore()
+    const user_s = userStore()
 
     const { selected_place } = defineProps(['selected_place'])
 
@@ -62,7 +64,6 @@
                 e.stop()
 
                 if(!e.placeId){
-                    console.error('Seleccione un lugar valido')
                     return
                 }
 

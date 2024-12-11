@@ -3,6 +3,7 @@
     import { spotStore } from '@/stores/spot'
     import { userStore } from '@/stores/user'
     import { useRouter } from 'vue-router'
+    import { toastStore } from '@/stores/toast'
 
     const SpotRates = defineAsyncComponent(() => import('@/components/SpotRatesComponent.vue'))
     const Spinner = defineAsyncComponent(() => import('@/components/SpinnerComponent.vue'))
@@ -10,6 +11,7 @@
     const spot_s = spotStore()
     const user_s = userStore()
     const router = useRouter()
+    const toast_s = toastStore()
 
     onMounted(async () => {
         await spot_s.getGroupSpots(user_s.user.group_id)
@@ -24,6 +26,7 @@
         const result = await spot_s.deleteSpot(spot_id)
 
         if(result){
+            toast_s.show('lugar eliminado', 'success')
             await spot_s.getGroupSpots(user_s.user.group_id)
         }
     }
@@ -40,7 +43,7 @@
         <div v-if='spot_s.spots.length > 0' class='container-spots'>
             <article v-for='spot in spot_s.spots' :key='spot.id' @click='() => navigateTo(e, spot.id)'>
                 <div class='container-photo'>
-                    <img :src="spot.photo ? spot.photo : 'https://via.placeholder.com/150?text=Sin%20foto'" alt='foto del lugar'>
+                    <img :src="spot.photo ? spot.photo : '/src/assets/images/placeholder-photo.png'" alt='foto del lugar'>
                 </div>
                 <div class='container-info'>
                     <p class='name'>{{ spot.name }}</p>

@@ -43,6 +43,7 @@ export const spotStore = defineStore('spot', () => {
 
         const data = await response.json()
         spots.value = data
+        return data
     }
 
     async function getSpotById(spot_id){

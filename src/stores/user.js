@@ -63,9 +63,7 @@ export const userStore = defineStore('user', () => {
             return false
         }
 
-        user.value = {}
-        user_active.value = false
-        localStorage.removeItem(global_s.USER_LOCALSTORAGE_KEY)
+        logout()
 
         group_s.leaveGroup()
 

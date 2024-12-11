@@ -23,13 +23,6 @@ const router = createRouter({
       children: [
         { path: '', name:'spot_id', component: () => import('@/views/SpotDetailView.vue')}
       ]
-    },
-    {
-      path: '/profile',
-      component: () => import('@/layouts/main.vue'),
-      children: [
-        { path: '', name:'profile', component: () => import('@/views/ProfileView.vue') },
-      ]
     }
   ],
 })

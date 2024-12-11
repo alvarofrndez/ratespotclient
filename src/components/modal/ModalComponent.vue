@@ -6,7 +6,7 @@
     const emit = defineEmits(['groupCreated', 'rateAdded', 'actionPerformed'])
 
     function close(e){
-        const wrapper = document.querySelector('.wrapper') 
+        const wrapper = document.querySelector('.wrapper-modal') 
 
         if(e.target == wrapper){
             modal_s.showing = false
@@ -20,8 +20,8 @@
 </script>
 
 <template>
-    <section class='wrapper' @click='(e) => close(e)'>
-        <div class='container'>
+    <section class='wrapper-modal' @click='(e) => close(e)'>
+        <div class='container-modal'>
             <component :is='modal_s.component' @actionPerformed='handleActionPerformed'/>
         </div>
     </section>
@@ -30,7 +30,7 @@
 <style lang='scss' scoped>
     @import '@/assets/style.scss';
 
-    .wrapper{
+    .wrapper-modal{
         // size
         width: 100vw;
         height: 100vh;
@@ -49,7 +49,7 @@
         cursor: pointer;
 
         
-        .container{
+        .container-modal{
             // size
             max-width: 80%;
             max-height: 80%;

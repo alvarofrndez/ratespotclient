@@ -4,12 +4,14 @@
     import { spotStore } from '@/stores/spot'
     import { userStore } from '@/stores/user'
     import { useRouter } from 'vue-router'
+    import { toastStore } from '@/stores/toast'
 
     // stores
     const modal_s = modalStore()
     const spot_s = spotStore()
     const user_s = userStore()
     const router = useRouter()
+    const toast_s = toastStore()
 
     const photo = ref(null)
     const is_already_saved = ref(false)
@@ -34,17 +36,25 @@
 
         if (result) {
             modal_s.closeModal()
+            toast_s.show('lugar guardado', 'success')
+            router.push('/spots/' + user_s.user.group_id + '-' + modal_s.data.place_id)
+            await spot_s.getGroupSpots(user_s.user.group_id)
+        }else{
+            toast_s.show('error al guardar el lugar', 'error')
         }
     }
 
     async function deleteSpot(e) {
         e.stopPropagation()
 
-        const result = await spot_s.deleteSpot(modal_s.data.place_id)
+        const result = await spot_s.deleteSpot(user_s.user.group_id + '-' + modal_s.data.place_id)
 
         if (result) {
-            console.log('deleted')
             modal_s.closeModal()
+            toast_s.show('lugar eliminado', 'success')
+            await spot_s.getGroupSpots(user_s.user.group_id)
+        }else{
+            toast_s.show('error al eliminar el lugar', 'error')
         }
     }
 

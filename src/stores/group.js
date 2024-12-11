@@ -108,7 +108,7 @@ export const groupStore = defineStore('group', () => {
     }
 
     async function deleteGroup(id){
-        const response = await fetch(global_s.API_URL + '/groups/delete/' + id, {
+        const response = await fetch(global_s.API_URL + '/group/' + id, {
             method: 'DELETE',
         })
 
@@ -117,6 +117,10 @@ export const groupStore = defineStore('group', () => {
         }
 
         const data = await response.json()
+
+        leaveGroup()
+        group.value = {}
+
         return data
     }
 

@@ -1,8 +1,9 @@
 <script setup>
-    import { ref } from 'vue'
+    import { ref, onMounted } from 'vue'
     import { modalStore } from '@/stores/modal.js'
     import { groupStore } from '@/stores/group.js'
     import { userStore } from '@/stores/user'
+    import { toastStore } from '@/stores/toast'
 
     const emit = defineEmits(['actionPerformed'])
 
@@ -10,15 +11,16 @@
     const modal_s = modalStore()
     const group_s = groupStore()
     const user_s = userStore()
+    const toast_s = toastStore()
 
     // variables
     const name = ref('')
     const code = ref('')
     const username = ref('')
 
-    async function generateCode() {
+    onMounted(async () => {
         code.value = await group_s.generateCode()
-    }
+    })
 
     async function createGroup() {
         const result = await group_s.createGroup(name.value, code.value, username.value)
@@ -29,30 +31,27 @@
             group_s.setActiveGroup(result.group)
             modal_s.closeModal()
             emit('actionPerformed')
+            toast_s.show('grupo creado', 'success')
         }else{
-            console.log('Error al crear el grupo')
+            toast_s.show('error al crear el grupo', 'error')
         }
     }
 
 </script>
 
 <template>
+
     <div class='container'>
-        <h1>Crear nuevo grupo</h1>
+        <icon class='go-back' name='io-chevron-back-outline' @click='modal_s.closeModal'/>
         <div>
             <label for='name'>Nombre</label>
             <input type='text' v-model='name'/>
         </div>
         <div>
-            <label for='code'>Codigo</label>
-            <input type='text' v-model='code'/>
-            <button @click='generateCode'>Generar codigo</button>
-        </div>
-        <div>
             <label for='username'>Usuario</label>
             <input type='text' v-model='username'/>
         </div>
-        <button @click='createGroup'>Crear</button>
+        <button class='create' @click='createGroup'>Crear</button>
     </div>
 </template>
 
@@ -68,48 +67,60 @@
         position: relative;
 
         // display
-        @include flex(column, center, flex-start, 2rem);
+        @include flex(column, center, center, 2rem);
 
-        // margin
-        margin-top: 2rem;
+        .go-back{
+            align-self: flex-start;
 
-        // decoration
-        background-color: rgba($color: $h-c-text, $alpha: .1);
-
-        label{
-            // size
-            width: 100%;
-            height: 2rem;
-
-            // position
-            position: relative;
-
-            // display
-            @include flex(column, center, flex-start, 1rem);
+            // decoration
+            background-color: $h-c-background;
+            border-radius: 50%;
         }
 
-        input{
+        div{
             // size
             width: 100%;
-            height: 2rem;
-
-            // position
-            position: relative;
 
             // display
-            @include flex(column, center, flex-start, 1rem);
+            @include flex(column, center, flex-start, 5px);
+
+            label{
+                // size
+                width: 100%;
+
+                // decoration
+                color: $h-c-text;
+                font-weight: bold;
+            }
+
+            input{
+                // size
+                width: calc(100% - 10px);
+
+                // margin
+                padding: 5px;
+
+                // decoration
+                border-radius: 10px;
+                border: 1px solid $h-c-border;
+                background-color: $h-c-background;
+                outline: none;            
+            }
         }
-
-        button{
-            // size
-            width: 100%;
-            height: 2rem;
-
-            // position
-            position: relative;
-
+        
+        .create{
             // display
-            @include flex(column, center, flex-start, 1rem);
+            align-self: flex-end;
+
+            // margin
+            padding: 7.5px;
+
+            // decoration
+            border-radius: 10px;
+            background-color: $h-c-text;
+            border: none;
+            color: $h-c-background !important;
+            outline: none;
         }
     }
 </style>

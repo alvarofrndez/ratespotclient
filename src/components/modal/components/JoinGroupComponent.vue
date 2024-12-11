@@ -3,10 +3,12 @@
     import { modalStore } from '@/stores/modal'
     import { groupStore } from '@/stores/group'
     import { userStore } from '@/stores/user'
+    import { toastStore } from '@/stores/toast'
 
     const modal_s = modalStore()
     const group_s = groupStore()
     const user_s = userStore()
+    const toast_s = toastStore()
 
     const emit = defineEmits(['actionPerformed'])
 
@@ -20,30 +22,81 @@
                 modal_s.closeModal()
                 emit('actionPerformed')
             }else{
-                console.log('error al unirse al grupo')
+                toast_s.show('error al unirse al grupo', 'error')
             }
         }else{
-            console.log('escribe un nombre de usuario')
+            toast_s.show('nombre de usuario vacio', 'error')
         }
     }
 </script>
 
 <template>
     <section class='container'>
-        <h3>Unirse a un grupo</h3>
-        <div class='container-actions'>
-            <span>{{ modal_s.data.code }}</span>
-            <span>{{ modal_s.data.name }}</span>
-            <div>
-                <label for='username'>Nombre de usuario</label>
-                <input type='text' v-model='username' placeholder='nombre de usuario...'>
-            </div>
-            <button @click='joinGroup'>Unirse</button>
+        <icon class='go-back' name='io-chevron-back-outline' @click='modal_s.closeModal'/>
+        <div class='username'>
+            <label>Nombre de usuario</label>
+            <input type='text' v-model='username' placeholder='cybernene'>
         </div>
+        <button @click='joinGroup'>Unirse</button>
     </section>
 </template>
 
 <style scoped lang='scss'>
     @import '@/assets/style.scss';
 
+
+    .container{
+        // display
+        @include flex(column, center, center, 2rem);
+
+        .go-back{
+            align-self: flex-start;
+
+            // decoration
+            background-color: $h-c-background;
+            border-radius: 50%;
+        }
+
+        .username{
+            // display
+            @include flex(column, flex-start);
+
+            label{
+                // margin
+                margin-bottom: 5px;
+
+                // decoration
+                font-weight: bold;
+            }
+
+            input{
+                // size
+                width: calc(100% - 10px);
+
+                // margin
+                padding: 5px;
+
+                // decoration
+                border-radius: 10px;
+                border: 1px solid $h-c-border;
+                background-color: $h-c-background;
+                outline: none;            
+            }
+        }
+
+        button{
+            // display
+            align-self: flex-end;
+
+            // margin
+            padding: 7.5px;
+
+            // decoration
+            border-radius: 10px;
+            background-color: $h-c-text;
+            border: none;
+            color: $h-c-background !important;
+            outline: none;
+        }
+    }
 </style>

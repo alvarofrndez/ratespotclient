@@ -1,4 +1,14 @@
 <script setup>
+    import { userStore } from '@/stores/user'
+    import { toastStore } from '@/stores/toast'
+
+    const user_s = userStore()
+    const toast_s = toastStore()
+
+    function logout(){
+        user_s.logout()
+        toast_s.show('sesión cerrada', 'success')
+    }
 </script>
 
 <template>
@@ -16,9 +26,7 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/profile">
-                        <icon name='fa-user'/>
-                    </router-link>
+                    <icon @click='logout' name='ri-login-circle-fill' flip='horizontal'/>
                 </li>
             </ul>
         </nav>

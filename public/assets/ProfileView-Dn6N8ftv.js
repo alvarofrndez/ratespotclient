@@ -1,0 +1,1 @@
+import{u as s}from"./user-WJktJhRJ.js";import{_ as n,c as a,b as e,f as l}from"./index-C1sxwVN5.js";const u={__name:"ProfileView",setup(c){const r=s();function t(){r.logout()}return(i,o)=>(l(),a("div",null,[o[0]||(o[0]=e("h1",null,"Profile",-1)),e("button",{onClick:t},"Cerrar sesion")]))}},p=n(u,[["__scopeId","data-v-95f0d1ad"]]);export{p as default};

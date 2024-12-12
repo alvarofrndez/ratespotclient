@@ -1,0 +1,1 @@
+import{_ as a,f as n,c as o,b as s}from"./index-Bq31n-Mt.js";const t={},c={class:"separator"};function r(l,e){return n(),o("div",c,e[0]||(e[0]=[s("span",{class:"line"},null,-1),s("span",null,"o",-1),s("span",{class:"line"},null,-1)]))}const _=a(t,[["render",r],["__scopeId","data-v-9780dbcb"]]);export{_ as default};

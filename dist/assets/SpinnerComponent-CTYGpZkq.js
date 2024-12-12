@@ -1,1 +1,0 @@
-import{_ as n,f as s,c as o,b as t}from"./index-Ba6tEgh7.js";const r={},a={class:"spinner-container"};function c(_,e){return s(),o("div",a,e[0]||(e[0]=[t("div",{class:"spinner"},null,-1)]))}const i=n(r,[["render",c],["__scopeId","data-v-0d4f0a13"]]);export{i as default};

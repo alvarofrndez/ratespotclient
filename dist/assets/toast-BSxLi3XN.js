@@ -1,0 +1,1 @@
+import{q as u,i as t}from"./index-BxKUM9BA.js";const n=u("toast",()=>{let o=t(""),a=t(""),e=t(!1);function s(l,r){o.value=l,a.value=r,e.value=!0,setTimeout(()=>{e.value=!1},[3e3])}return{text:o,icon:a,showing:e,show:s}});export{n as t};

@@ -8,7 +8,7 @@
 <template>
     <div class='container-toast'>
         <div class='toast'>
-            <img :src=" '/images/' + toast.icon + '.svg'"/>
+            <img :src=" '/images/' + toast.icon + '.svg'" alt="icono" loading="lazy"/>
             <span>{{ toast.text }}</span>
         </div>
     </div>

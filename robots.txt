@@ -1,0 +1,6 @@
+User-agent: *
+
+Allow: /assets/
+
+# Añadir el sitemap
+Sitemap: https://ratespot.vercel.app/sitemap.xml

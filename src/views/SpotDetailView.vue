@@ -65,7 +65,7 @@
         <icon class='back-icon' name='io-chevron-back-outline' @click='() => $router.go(-1)' scale='1.3'/>
         <icon class='delete-icon' name='md-bookmarkadded-round' @click='deleteSpot' scale='1.3'/>
         <div class='container-photo'>
-            <img :src="spot.photo ? spot.photo : '/images/placeholder-photo.png'" alt='foto del lugar'>
+            <img :src="spot.photo ? spot.photo : '/images/placeholder-photo.png'" loading="lazy" alt='foto del lugar'>
         </div>
         <article>
             <div class='container-data'>

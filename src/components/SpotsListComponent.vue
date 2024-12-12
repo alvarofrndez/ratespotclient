@@ -43,7 +43,7 @@
         <div v-if='spot_s.spots.length > 0' class='container-spots'>
             <article v-for='spot in spot_s.spots' :key='spot.id' @click='() => navigateTo(e, spot.id)'>
                 <div class='container-photo'>
-                    <img :src="spot.photo ? spot.photo : '/images/placeholder-photo.png'" alt='foto del lugar'>
+                    <img :src="spot.photo ? spot.photo : '/images/placeholder-photo.png'" loading="lazy" alt='foto del lugar'>
                 </div>
                 <div class='container-info'>
                     <p class='name'>{{ spot.name }}</p>

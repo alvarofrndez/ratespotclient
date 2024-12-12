@@ -55,7 +55,6 @@ export const mapStore = defineStore('map', () => {
                     lng: longitude,
                 }
 
-                map.value.setCenter(user_location)
                 user_marker.value.setPosition(user_location)
             },
             (error) => {
